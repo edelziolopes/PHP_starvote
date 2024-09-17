@@ -1,25 +1,36 @@
 <h2>Vincular Usuários a Projetos</h2>
-<form action="/vinculo/create" method="POST">
-    <div class="mb-3">
-        <label for="id_usuario" class="form-label">Usuário</label>
-        <select class="form-select" id="id_usuario" name="id_usuario" required>
-            <option value="" disabled selected>Escolha um usuário</option>
-            <?php foreach ($data['usuarios'] as $usuario) { ?>
-                <option value="<?= $usuario['id'] ?>"><?= $usuario['nome'] ?></option>
-            <?php } ?>
-        </select>
-    </div>
+
+<!-- Formulário para vinculação de usuários a projetos -->
+<form action="/vinculo/getUsuariosByProjeto" method="POST">
     <div class="mb-3">
         <label for="id_projeto" class="form-label">Projeto</label>
-        <select class="form-select" id="id_projeto" name="id_projeto" required>
+        <select class="form-select" id="id_projeto" name="id_projeto" required onchange="this.form.submit()">
             <option value="" disabled selected>Escolha um projeto</option>
             <?php foreach ($data['projetos'] as $projeto) { ?>
-                <option value="<?= $projeto['id'] ?>"><?= $projeto['projeto'] ?></option>
+                <option value="<?= $projeto['id'] ?>" <?= isset($_POST['id_projeto']) && $_POST['id_projeto'] == $projeto['id'] ? 'selected' : '' ?>>
+                    <?= $projeto['projeto'] ?>
+                </option>
             <?php } ?>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Vincular</button>
 </form>
+
+<!-- Se a lista de usuários estiver disponível, exibir o formulário completo -->
+<?php if (!empty($data['usuarios'])) { ?>
+    <form action="/vinculo/create" method="POST">
+        <div class="mb-3">
+            <label for="id_usuario" class="form-label">Usuário</label>
+            <select class="form-select" id="id_usuario" name="id_usuario" required>
+                <option value="" disabled selected>Escolha um usuário</option>
+                <?php foreach ($data['usuarios'] as $usuario) { ?>
+                    <option value="<?= $usuario['id'] ?>"><?= $usuario['nome'] ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <input type="hidden" name="id_projeto" value="<?= $_POST['id_projeto'] ?? '' ?>">
+        <button type="submit" class="btn btn-primary">Vincular</button>
+    </form>
+<?php } ?>
 
 <hr>
 

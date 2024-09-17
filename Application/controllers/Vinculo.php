@@ -6,14 +6,39 @@ class Vinculo extends Controller
     public function index()
     {
         $Vinculos = $this->model('Vinculos');
-        $Usuarios = $this->model('Usuarios');
         $Projetos = $this->model('Projetos');
-        
+
+        // Busca todos os vínculos e projetos
         $data = $Vinculos::findAll();
-        $usuarios = $Usuarios::findAll();
         $projetos = $Projetos::findAll();
 
-        $this->view('vinculo/index', ['vinculos' => $data, 'usuarios' => $usuarios, 'projetos' => $projetos]);
+        $this->view('vinculo/index', ['vinculos' => $data, 'projetos' => $projetos, 'usuarios' => []]);
+    }
+
+    // Método para carregar usuários de acordo com o projeto selecionado
+    public function getUsuariosByProjeto()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id_projeto = $_POST['id_projeto'];
+            $Vinculos = $this->model('Vinculos');
+
+            // Busca a equipe relacionada ao projeto
+            $equipe = $Vinculos::findEquipeByProjeto($id_projeto);
+
+            if ($equipe) {
+                // Busca os usuários da equipe
+                $usuarios = $Vinculos::findUsuariosByEquipe($equipe['id_equipe']);
+                $Projetos = $this->model('Projetos');
+                $projetos = $Projetos::findAll();
+
+                // Retorna a view com os usuários filtrados
+                $this->view('vinculo/index', ['projetos' => $projetos, 'usuarios' => $usuarios]);
+            } else {
+                $this->view('vinculo/index', ['projetos' => [], 'usuarios' => []]);
+            }
+        } else {
+            $this->pageNotFound();
+        }
     }
 
     public function create()
@@ -22,8 +47,9 @@ class Vinculo extends Controller
             $id_usuario = $_POST['id_usuario'];
             $id_projeto = $_POST['id_projeto'];
             $Vinculos = $this->model('Vinculos');
+
+            // Criação do vínculo
             $Vinculos::create($id_usuario, $id_projeto);
-            
             $this->redirect('vinculo/index');
         } else {
             $this->pageNotFound();
