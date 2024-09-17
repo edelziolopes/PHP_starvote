@@ -1,7 +1,83 @@
-<div class="container">
-  <div class="row">
-    <div class="col-8 offset-2 text-center" style="margin-top:150px">
-      <h1>Categoria</h1>
+<h2>Cadastro de Categorias</h2>
+<form action="/categoria/create" method="POST">
+    <div class="mb-3">
+        <label for="categoria" class="form-label">Categoria</label>
+        <input type="text" class="form-control" id="categoria" name="categoria" required>
+    </div>
+    <div class="mb-3">
+        <label for="peso" class="form-label">Peso</label>
+        <input type="number" class="form-control" id="peso" name="peso" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+<hr>
+
+<h3 class="mt-5">Lista de Categorias</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Peso</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data['categorias'] as $categoria) { ?>
+    <tr>
+      <td><?= $categoria['id'] ?></td>
+      <td><?= $categoria['categoria'] ?></td>
+      <td><?= $categoria['peso'] ?></td>
+      <td>
+        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="<?= $categoria['id'] ?>" data-categoria="<?= $categoria['categoria'] ?>" data-peso="<?= $categoria['peso'] ?>">Editar</button>
+        <a href="/categoria/delete/<?= $categoria['id'] ?>" class="btn btn-sm btn-danger">Excluir</a>
+      </td>
+    </tr>
+    <?php } ?>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Editar Categoria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/categoria/edit" method="POST">
+          <input type="hidden" id="edit-id" name="id">
+          <div class="mb-3">
+              <label for="edit-categoria" class="form-label">Categoria</label>
+              <input type="text" class="form-control" id="edit-categoria" name="categoria" required>
+          </div>
+          <div class="mb-3">
+              <label for="edit-peso" class="form-label">Peso</label>
+              <input type="number" class="form-control" id="edit-peso" name="peso" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+    var editModal = document.getElementById('editModal')
+    editModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget
+      var id = button.getAttribute('data-id')
+      var categoria = button.getAttribute('data-categoria')
+      var peso = button.getAttribute('data-peso')
+
+      var modalIdInput = editModal.querySelector('#edit-id')
+      var modalCategoriaInput = editModal.querySelector('#edit-categoria')
+      var modalPesoInput = editModal.querySelector('#edit-peso')
+
+      modalIdInput.value = id
+      modalCategoriaInput.value = categoria
+      modalPesoInput.value = peso
+    })
+</script>

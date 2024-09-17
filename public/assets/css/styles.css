@@ -1,0 +1,18 @@
+/* Tema escuro */
+body {
+    background-color: #cecece;
+    color: #ffffff;
+}
+nav, footer {
+    background-color: #1f1f1f;
+}
+a {
+    color: #ffffff;
+}
+/* Estilo do conteúdo com fundo branco e texto preto */
+.content {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+}

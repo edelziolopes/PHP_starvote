@@ -6,7 +6,7 @@ use PDO;
 class Database extends PDO
 {
   // configuração do banco de dados
-  private $DB_NAME = 'mvc_db';
+  private $DB_NAME = 'starvote';
   private $DB_USER = 'root';
   private $DB_PASSWORD = '';
   private $DB_HOST = '127.0.0.1';
