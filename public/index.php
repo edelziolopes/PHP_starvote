@@ -25,22 +25,25 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/categoria">Categoria</a>
+                        <a class="nav-link" href="/categoria">Categorias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/equipe">Equipe</a>
+                        <a class="nav-link" href="/equipe">Equipes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/usuario">Usuário</a>
+                        <a class="nav-link" href="/usuario">Usuários</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/projeto">Projeto</a>
+                        <a class="nav-link" href="/projeto">Projetos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/foto">Foto</a>
+                        <a class="nav-link" href="/foto">Fotos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/vinculo">Vinculo</a>
+                        <a class="nav-link" href="/vinculo">Vinculos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/voto">Votos</a>
                     </li>
                 </ul>
             </div>
