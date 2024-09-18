@@ -1,7 +1,7 @@
 <h2>Vincular Usuários a Projetos</h2>
 
 <!-- Formulário para vinculação de usuários a projetos -->
-<form action="/vinculo/getUsuariosByProjeto" method="POST">
+<form action="/vinculo/index/" method="POST">
     <div class="mb-3">
         <label for="id_projeto" class="form-label">Projeto</label>
         <select class="form-select" id="id_projeto" name="id_projeto" required onchange="this.form.submit()">

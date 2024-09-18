@@ -3,41 +3,28 @@ use Application\core\Controller;
 
 class Vinculo extends Controller
 {
+
     public function index()
-    {
-        $Vinculos = $this->model('Vinculos');
-        $Projetos = $this->model('Projetos');
-
-        // Busca todos os vínculos e projetos
-        $data = $Vinculos::findAll();
-        $projetos = $Projetos::findAll();
-
-        $this->view('vinculo/index', ['vinculos' => $data, 'projetos' => $projetos, 'usuarios' => []]);
-    }
-
-    // Método para carregar usuários de acordo com o projeto selecionado
-    public function getUsuariosByProjeto()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_projeto = $_POST['id_projeto'];
             $Vinculos = $this->model('Vinculos');
-
-            // Busca a equipe relacionada ao projeto
             $equipe = $Vinculos::findEquipeByProjeto($id_projeto);
-
             if ($equipe) {
-                // Busca os usuários da equipe
                 $usuarios = $Vinculos::findUsuariosByEquipe($equipe['id_equipe']);
                 $Projetos = $this->model('Projetos');
                 $projetos = $Projetos::findAll();
-
-                // Retorna a view com os usuários filtrados
-                $this->view('vinculo/index', ['projetos' => $projetos, 'usuarios' => $usuarios]);
+                $vinculos = $Vinculos::findAll();
+                $this->view('vinculo/index', ['vinculos' => $vinculos, 'projetos' => $projetos, 'usuarios' => $usuarios]);
             } else {
                 $this->view('vinculo/index', ['projetos' => [], 'usuarios' => []]);
             }
-        } else {
-            $this->pageNotFound();
+        } else {                
+            $Vinculos = $this->model('Vinculos');
+            $Projetos = $this->model('Projetos');
+            $vinculos = $Vinculos::findAll();
+            $projetos = $Projetos::findAll();
+            $this->view('vinculo/index', ['vinculos' => $vinculos, 'projetos' => $projetos, 'usuarios' => []]);
         }
     }
 
