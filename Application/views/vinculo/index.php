@@ -1,6 +1,5 @@
 <h2>Vincular Usuários a Projetos</h2>
 
-<!-- Formulário para vinculação de usuários a projetos -->
 <form action="/vinculo/index/" method="POST">
     <div class="mb-3">
         <label for="id_projeto" class="form-label">Projeto</label>
@@ -15,7 +14,6 @@
     </div>
 </form>
 
-<!-- Se a lista de usuários estiver disponível, exibir o formulário completo -->
 <?php if (!empty($data['usuarios'])) { ?>
     <form action="/vinculo/create" method="POST">
         <div class="mb-3">
