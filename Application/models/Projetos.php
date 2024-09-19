@@ -53,4 +53,24 @@ class Projetos
         );
         return $result->rowCount();
     }
+
+    public static function findAllWithDetails()
+    {
+        $conn = new Database();
+        $result = $conn->executeQuery('
+            SELECT 
+                p.id AS projeto_id, 
+                p.projeto AS projeto_nome, 
+                p.descricao, 
+                e.equipe AS equipe_nome, 
+                u.nome AS usuario_nome, 
+                f.foto
+            FROM tb_projeto p
+            JOIN tb_equipe e ON p.id_equipe = e.id
+            JOIN tb_vinculo v ON p.id = v.id_projeto
+            JOIN tb_usuario u ON v.id_usuario = u.id
+            LEFT JOIN tb_foto f ON p.id = f.id_projeto
+        ');
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

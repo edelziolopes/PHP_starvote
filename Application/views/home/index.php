@@ -1,7 +1,71 @@
+<h1>Projetos</h1>
+
 <div class="container">
-  <div class="row">
-    <div class="col-8 offset-2 text-center">
-      <h1>Listar Projetos</h1>
+    <div class="row">
+        <?php 
+        $projetos = [];
+        // Agrupar os projetos com base no ID
+        foreach ($data['projetos'] as $projeto) {
+            $projetos[$projeto['projeto_id']]['projeto_nome'] = $projeto['projeto_nome'];
+            $projetos[$projeto['projeto_id']]['descricao'] = $projeto['descricao'];
+            $projetos[$projeto['projeto_id']]['equipe_nome'] = $projeto['equipe_nome'];
+            $projetos[$projeto['projeto_id']]['usuarios'][] = $projeto['usuario_nome'];
+            // Garantir que haja fotos antes de adicionar
+            if (!empty($projeto['foto'])) {
+                $projetos[$projeto['projeto_id']]['fotos'][] = $projeto['foto'];
+            }
+        }
+
+        // Iterar sobre os projetos agrupados
+        foreach ($projetos as $projeto_id => $projeto) { 
+        ?>
+        <div class="col-md-4">
+            <div class="card">
+                <?php if (!empty($projeto['fotos'])) { ?>
+                    <!-- Carrossel de fotos -->
+                    <div id="carousel-<?= $projeto_id ?>" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php foreach ($projeto['fotos'] as $index => $foto) { ?>
+                                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                                    <img src="fotos/<?= $foto ?>" class="d-block w-100" alt="Foto do projeto">
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <!-- Controles do carrossel -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<?= $projeto_id ?>" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-<?= $projeto_id ?>" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Próximo</span>
+                        </button>
+                    </div>
+                <?php } ?>
+                <div class="card-body">
+                    <h5 class="card-title"><?= $projeto['projeto_nome'] ?></h5>
+                    <p class="card-text"><?= $projeto['descricao'] ?></p>
+                    <p><strong>Equipe:</strong> <?= $projeto['equipe_nome'] ?></p>
+                    <p><strong>Integrantes:</strong></p>
+                    <ul>
+                        <?php foreach (array_unique($projeto['usuarios']) as $usuario) { ?>
+                            <li><?= $usuario ?></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
     </div>
-  </div>
 </div>
+
+<!-- Bootstrap Carousel JS -->
+<script>
+    var carousels = document.querySelectorAll('.carousel');
+    carousels.forEach(function(carousel) {
+        var carouselInstance = new bootstrap.Carousel(carousel, {
+            interval: 3000, // Tempo de rotação automático (3 segundos)
+            ride: 'carousel'
+        });
+    });
+</script>
