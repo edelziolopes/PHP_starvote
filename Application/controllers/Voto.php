@@ -23,7 +23,7 @@ class Voto extends Controller
             $id_projeto = $_POST['id_projeto'];
             $voto = $_POST['voto'];
             $Votos = $this->model('Votos');
-            $Votos::create($id_usuario, $id_projeto, $voto);
+            $Votos::createOrUpdate($id_usuario, $id_projeto, $voto);
             
             $this->redirect('voto/index');
         } else {

@@ -56,4 +56,21 @@ class Votos
         );
         return $result->rowCount();
     }
+    public static function createOrUpdate(int $id_usuario, int $id_projeto, int $voto)
+    {
+        $conn = new Database();
+        $query = '
+            INSERT INTO tb_voto (id_usuario, id_projeto, voto)
+            VALUES (:ID_USUARIO, :ID_PROJETO, :VOTO)
+            ON DUPLICATE KEY UPDATE voto = :VOTO';
+        
+        $result = $conn->executeQuery($query, [
+            ':ID_USUARIO' => $id_usuario,
+            ':ID_PROJETO' => $id_projeto,
+            ':VOTO' => $voto
+        ]);
+
+        return $result->rowCount();
+    }
+
 }

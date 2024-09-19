@@ -56,7 +56,8 @@ class Vinculos
     {
         $conn = new Database();
         $result = $conn->executeQuery(
-            'INSERT INTO tb_vinculo (id_usuario, id_projeto) VALUES (:ID_USUARIO, :ID_PROJETO)',
+            'INSERT INTO tb_vinculo (id_usuario, id_projeto) VALUES (:ID_USUARIO, :ID_PROJETO)
+             ON DUPLICATE KEY UPDATE id_projeto = :ID_PROJETO',
             array(':ID_USUARIO' => $id_usuario, ':ID_PROJETO' => $id_projeto)
         );
         return $result->rowCount();
