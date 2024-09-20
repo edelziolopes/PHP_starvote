@@ -13,7 +13,7 @@
         <select class="form-select" id="id_equipe" name="id_equipe" required>
             <option value="" disabled selected>Escolha uma equipe</option>
             <?php foreach ($data['equipes'] as $equipe) { ?>
-                <option value="<?= $equipe['id'] ?>"><?= $equipe['equipe'] ?></option>
+                <option value="<?= $equipe['id'] ?>"><?= $equipe['equipe'] ?> - <?= $equipe['categoria'] ?></option>
             <?php } ?>
         </select>
     </div>

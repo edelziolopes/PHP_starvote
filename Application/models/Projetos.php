@@ -9,9 +9,10 @@ class Projetos
     {
         $conn = new Database();
         $result = $conn->executeQuery('
-            SELECT p.id, p.projeto, p.descricao, p.id_equipe, e.equipe
-            FROM tb_projeto p
-            JOIN tb_equipe e ON p.id_equipe = e.id
+        SELECT p.id, p.projeto, p.descricao, p.id_equipe, e.equipe, c.categoria
+        FROM tb_projeto p
+        JOIN tb_equipe e ON p.id_equipe = e.id
+        JOIN tb_categoria c ON e.id_categoria = c.id
         ');
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
