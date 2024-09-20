@@ -29,8 +29,9 @@ class Usuario extends Controller
             $nome = $_POST['nome'];
             $email = $_POST['email'];
             $id_equipe = $_POST['id_equipe'];
+            $senha = $_POST['senha'];
             $Usuarios = $this->model('Usuarios');
-            $Usuarios::create($nome, $email, $id_equipe);
+            $Usuarios::create($nome, $email, $senha, $id_equipe);
 
             $this->redirect('usuario/index');
         } else {
@@ -45,9 +46,11 @@ class Usuario extends Controller
             $nome = $_POST['nome'];
             $email = $_POST['email'];
             $id_equipe = $_POST['id_equipe'];
+            $senha = isset($_POST['senha']) ? $_POST['senha'] : null;
+
             if (is_numeric($id)) {
                 $Usuarios = $this->model('Usuarios');
-                $Usuarios::editById($id, $nome, $email, $id_equipe);
+                $Usuarios::editById($id, $nome, $email, $id_equipe, $senha);
                 $this->redirect('usuario/index');
             } else {
                 $this->pageNotFound();
@@ -56,5 +59,63 @@ class Usuario extends Controller
             $this->pageNotFound();
         }
     }
+
+    public function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
+            $Usuarios = $this->model('Usuarios');
+            $usuario = $Usuarios::findByEmail($email);
     
+            if ($usuario && password_verify($senha, $usuario['senha'])) {
+                // Criação do cookie
+                setcookie('usuario_id', $usuario['id'], time() + (86400 * 30), "/"); // Cookie válido por 30 dias
+                $this->redirect('home/index');
+            } else {
+                // Falha no login
+                $this->view('usuario/login', ['error' => 'Credenciais inválidas']);
+            }
+        } else {
+            $this->view('usuario/login');
+        }
+    }
+    
+    public function register()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $nome = $_POST['nome'];
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
+            $id_equipe = $_POST['id_equipe'];
+            
+            $Usuarios = $this->model('Usuarios');
+            $Usuarios::create($nome, $email, $senha, $id_equipe);
+    
+            $this->redirect('usuario/login');
+        } else {
+            $Equipes = $this->model('Equipes');
+            $equipes = $Equipes::findAll();
+            $this->view('usuario/register', ['equipes' => $equipes]);            
+        }
+    }
+
+    public function logout()
+    {
+        setcookie('usuario_id', '', time() - 3600, "/"); // Remove o cookie
+        $this->redirect('home/index');
+    }
+
+    public function checkAccess($requiredTeam)
+    {
+        if (!isset($_COOKIE['usuario_id'])) {
+            $this->redirect('usuario/login');
+        }
+        $Usuarios = $this->model('Usuarios');
+        $usuarioLogado = $Usuarios::findById($_COOKIE['usuario_id']);
+        if ($usuarioLogado['id_equipe'] != $requiredTeam) {
+            $this->view('errors/forbidden'); 
+            exit;
+        }
+    }
 }

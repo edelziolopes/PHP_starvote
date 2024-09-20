@@ -2,6 +2,22 @@
 
 <div class="container">
     <div class="row">
+
+        <div class="my-4">
+            <?php if (isset($_COOKIE['usuario_id'])): ?>
+                <?php
+                    // Obtém o nome do usuário logado
+                    $Usuarios = $this->model('Usuarios');
+                    $usuarioLogado = $Usuarios::findById($_COOKIE['usuario_id']);
+                ?>
+                <span>Bem-vindo, <?= htmlspecialchars($usuarioLogado['nome']); ?>!</span>
+                <a href="/usuario/logout" class="btn btn-danger">Sair</a>
+            <?php else: ?>
+                <a href="/usuario/login" class="btn btn-primary">Login</a>
+                <a href="/usuario/register" class="btn btn-secondary">Cadastre-se</a>
+            <?php endif; ?>
+        </div>
+
         <?php 
         $projetos = [];
         // Agrupar os projetos com base no ID

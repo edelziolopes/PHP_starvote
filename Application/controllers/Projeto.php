@@ -3,6 +3,8 @@ use Application\core\Controller;
 
 class Projeto extends Controller
 {
+    public function __construct() { $this->checkAccess([1, 2, 3, 4]); }
+    
     public function index()
     {
         $Projetos = $this->model('Projetos');

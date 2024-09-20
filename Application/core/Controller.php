@@ -32,4 +32,18 @@ class Controller
       header('Location: ' . $fullURL);
       exit();
   }
+
+  public function checkAccess(array $requiredTeamIds)
+  {
+      if (isset($_COOKIE['usuario_id'])) {
+          $Usuarios = $this->model('Usuarios');
+          $usuario = $Usuarios::findById($_COOKIE['usuario_id']);
+          if ($usuario && in_array($usuario['id_equipe'], $requiredTeamIds)) {
+              return true;
+          }
+      }
+      $this->pageNotFound();
+      exit();
+  }
+  
 }
