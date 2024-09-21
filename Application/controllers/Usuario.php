@@ -67,19 +67,18 @@ class Usuario extends Controller
             $senha = $_POST['senha'];
             $Usuarios = $this->model('Usuarios');
             $usuario = $Usuarios::findByEmail($email);
-    
             if ($usuario && password_verify($senha, $usuario['senha'])) {
-                // Criação do cookie
-                setcookie('usuario_id', $usuario['id'], time() + (86400 * 30), "/"); // Cookie válido por 30 dias
+                setcookie('usuario_id', $usuario['id'], time() + (86400 * 30), "/");
+                setcookie('usuario_equipe_id', $usuario['id_equipe'], time() + (86400 * 30), "/");
                 $this->redirect('home/index');
             } else {
-                // Falha no login
                 $this->view('usuario/login', ['error' => 'Credenciais inválidas']);
             }
         } else {
             $this->view('usuario/login');
         }
     }
+    
     
     public function register()
     {
@@ -103,6 +102,7 @@ class Usuario extends Controller
     public function logout()
     {
         setcookie('usuario_id', '', time() - 3600, "/"); // Remove o cookie
+        setcookie('usuario_equipe_id', '', time() - 3600, "/"); // Remove o cookie
         $this->redirect('home/index');
     }
 

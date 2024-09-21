@@ -43,7 +43,7 @@
                         <div class="carousel-inner">
                             <?php foreach ($projeto['fotos'] as $index => $foto) { ?>
                                 <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                                    <img src="fotos/<?= $foto ?>" class="d-block w-100" alt="Foto do projeto">
+                                    <img src="/fotos/<?= $foto ?>" class="d-block w-100" alt="Foto do projeto">
                                 </div>
                             <?php } ?>
                         </div>

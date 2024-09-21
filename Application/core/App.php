@@ -38,12 +38,10 @@ class App
         $this->page404 = true;
       }
     }
-
     if (!$this->page404) {
         require '../Application/controllers/' . $this->controller . '.php';
         $this->controller = new $this->controller();
     }
-
   }
 
   private function getMethodFromUrl($url)

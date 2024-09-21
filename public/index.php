@@ -24,27 +24,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categoria">Categorias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/equipe">Equipes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/usuario">Usuários</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/projeto">Projetos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/foto">Fotos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/vinculo">Vinculos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/voto">Votos</a>
-                    </li>
+                    <?php
+                    if (isset($_COOKIE['usuario_equipe_id'])) { $equipe_id = $_COOKIE['usuario_equipe_id'];
+                    if ($equipe_id == 4):?>
+                        <li class="nav-item"><a class="nav-link" href="/categoria">Categorias</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/equipe">Equipes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/usuario">Usuários</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/projeto">Projetos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/foto">Fotos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/vinculo">Vinculos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/voto">Votos</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="/vinculo">Resultados</a></li>
+                    <?php endif; } ?>
+                    <?php if (!isset($_COOKIE['usuario_id'])): ?>
+                        <li class="nav-item"><a class="nav-link" href="/usuario/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/usuario/register">Cadastre-se</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
