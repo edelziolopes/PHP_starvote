@@ -68,6 +68,7 @@
                             <li><?= $usuario ?></li>
                         <?php } ?>
                     </ul>
+                    <p><a style="width: 100%;" class="btn btn-success" href="/home/show/<?= $projeto_id ?>">Votar</a></p>
                 </div>
             </div>
         </div>
@@ -75,7 +76,6 @@
     </div>
 </div>
 
-<!-- Bootstrap Carousel JS -->
 <script>
     var carousels = document.querySelectorAll('.carousel');
     carousels.forEach(function(carousel) {

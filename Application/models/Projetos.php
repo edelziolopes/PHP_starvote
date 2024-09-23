@@ -27,6 +27,25 @@ class Projetos
             WHERE p.id = :ID LIMIT 1', array(':ID' => $id));
         return $result->fetch(PDO::FETCH_ASSOC);
     }
+    public static function findByIdAllDetails(int $id)
+    {
+        $conn = new Database();
+        $result = $conn->executeQuery('
+        SELECT 
+            p.id as projeto_id, 
+            p.nome as projeto_nome, 
+            p.descricao, 
+            e.nome as equipe_nome, 
+            u.nome as usuario_nome,
+            f.caminho as foto
+        FROM tb_projetos p
+        LEFT JOIN tb_equipes e ON e.id = p.id_equipe
+        LEFT JOIN tb_vinculos v ON v.id_projeto = p.id
+        LEFT JOIN tb_usuarios u ON u.id = v.id_usuario
+        LEFT JOIN tb_fotos f ON f.id_projeto = p.id
+        WHERE p.id = :ID', array(':ID' => $id));
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
 
     public static function deleteById(int $id)
     {

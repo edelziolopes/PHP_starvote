@@ -26,7 +26,7 @@
                     </li>
                     <?php
                     if (isset($_COOKIE['usuario_equipe_id'])) { $equipe_id = $_COOKIE['usuario_equipe_id'];
-                    if ($equipe_id == 4):?>
+                    if ($equipe_id != 10):?>
                         <li class="nav-item"><a class="nav-link" href="/categoria">Categorias</a></li>
                         <li class="nav-item"><a class="nav-link" href="/equipe">Equipes</a></li>
                         <li class="nav-item"><a class="nav-link" href="/usuario">Usuários</a></li>
