@@ -31,21 +31,22 @@ class Projetos
     {
         $conn = new Database();
         $result = $conn->executeQuery('
-        SELECT 
-            p.id as projeto_id, 
-            p.nome as projeto_nome, 
+            SELECT 
+            p.id AS projeto_id, 
+            p.projeto AS projeto_nome, 
             p.descricao, 
-            e.nome as equipe_nome, 
-            u.nome as usuario_nome,
-            f.caminho as foto
-        FROM tb_projetos p
-        LEFT JOIN tb_equipes e ON e.id = p.id_equipe
-        LEFT JOIN tb_vinculos v ON v.id_projeto = p.id
-        LEFT JOIN tb_usuarios u ON u.id = v.id_usuario
-        LEFT JOIN tb_fotos f ON f.id_projeto = p.id
-        WHERE p.id = :ID', array(':ID' => $id));
-        return $result->fetch(PDO::FETCH_ASSOC);
+            e.equipe AS equipe_nome, 
+            u.nome AS usuario_nome, 
+            f.foto
+            FROM tb_projeto p
+            JOIN tb_equipe e ON p.id_equipe = e.id
+            JOIN tb_vinculo v ON p.id = v.id_projeto
+            JOIN tb_usuario u ON v.id_usuario = u.id
+            LEFT JOIN tb_foto f ON p.id = f.id_projeto
+            WHERE p.id = :ID', array(':ID' => $id));
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 
     public static function deleteById(int $id)
     {

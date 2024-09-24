@@ -16,7 +16,7 @@ class Voto extends Controller
         $this->view('voto/index', ['votos' => $data, 'usuarios' => $usuarios, 'projetos' => $projetos]);
     }
 
-    public function create()
+    public function create($id = null)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_usuario = $_POST['id_usuario'];
@@ -24,8 +24,8 @@ class Voto extends Controller
             $voto = $_POST['voto'];
             $Votos = $this->model('Votos');
             $Votos::createOrUpdate($id_usuario, $id_projeto, $voto);
-            
-            $this->redirect('voto/index');
+            if (is_numeric($id)) { $this->redirect('/home/show/'.$id); }
+            else { $this->redirect('voto/index'); }
         } else {
             $this->pageNotFound();
         }

@@ -16,3 +16,34 @@ a {
     padding: 20px;
     border-radius: 10px;
 }
+.carousel-inner img {
+    height: 200px; /* Defina uma altura fixa desejada */
+    object-fit: cover; /* Corta a imagem para caber no container */
+    width: 100%; /* Garante que a largura ocupe todo o card */
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-md-4 {
+    display: flex;
+    margin-bottom: 20px; /* Espaçamento entre os cards */
+}
+
+.card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    flex-grow: 1; /* Faz o corpo do card expandir para ocupar a altura total */
+}
+
+.carousel-inner img {
+    height: 200px; /* Altura fixa para as imagens */
+    object-fit: cover; /* Corta a imagem para caber no container */
+    width: 100%; /* Garante que a largura ocupe todo o card */
+}

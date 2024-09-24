@@ -13,10 +13,12 @@ class Home extends Controller
       if (is_numeric($id)) {
       $Projetos = $this->model('Projetos');
       $Projeto = $Projetos::findByIdAllDetails($id);
-      $this->view('home/show', ['projetos' => $Projeto]);
+      //var_dump($Projeto);
+      $this->view('home/show', ['projeto' => $Projeto]);
     } else {
       $this->pageNotFound();
     }
   }
+  
 
 }
