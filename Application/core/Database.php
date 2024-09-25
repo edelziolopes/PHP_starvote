@@ -6,10 +6,10 @@ use PDO;
 class Database extends PDO
 {
   // configuração do banco de dados
-  private $DB_NAME = 'starvote';
-  private $DB_USER = 'root';
-  private $DB_PASSWORD = '';
-  private $DB_HOST = '127.0.0.1';
+  private $DB_NAME = 'u375395381_starvote';
+  private $DB_USER = 'u375395381_terceiro';
+  private $DB_PASSWORD = 'Server-123';
+  private $DB_HOST = 'srv1082.hstgr.io';
   private $DB_PORT = 3306;
 
   // armazena a conexão
