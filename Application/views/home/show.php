@@ -73,20 +73,15 @@
     <!-- Botão de votação -->
     <?php if (isset($_COOKIE['usuario_id'])): ?>
         <div class="vote-section mb-4">
-        <?php
-// Verificar se o usuário já votou e pegar o valor do voto
-$voto = isset($data['votoExistente']['voto']) ? (int)$data['votoExistente']['voto'] : null;
-?>
-
-<form action="/voto/create/<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>" method="POST">
-    <p>
-        <input style="width:100px;" type="number" class="form-control" id="voto" name="voto" min="1" max="5" value="<?= isset($voto) ? htmlspecialchars($voto) : '' ?>" required>
-    </p>
-    <input id="id_usuario" name="id_usuario" type="hidden" value="<?= $_COOKIE['usuario_id'] ?>">
-    <input id="id_projeto" name="id_projeto" type="hidden" value="<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>">
-    <input type="submit" class="btn btn-success" value="Votar">
-</form>
-
+            <?php $voto = isset($data['votoExistente']['voto']) ? (int)$data['votoExistente']['voto'] : null; ?>
+            <form action="/voto/create/<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>" method="POST">
+                <p>
+                    <input style="width:100px;" type="number" class="form-control" id="voto" name="voto" min="1" max="5" value="<?= isset($voto) ? htmlspecialchars($voto) : '' ?>" required>
+                </p>
+                <input id="id_usuario" name="id_usuario" type="hidden" value="<?= $_COOKIE['usuario_id'] ?>">
+                <input id="id_projeto" name="id_projeto" type="hidden" value="<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>">
+                <input type="submit" class="btn btn-success" value="Votar">
+            </form>
         </div>
     <?php else: ?>
         <div class="vote-section mb-4">
