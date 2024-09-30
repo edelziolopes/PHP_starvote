@@ -32,7 +32,6 @@ class Usuario extends Controller
             $senha = $_POST['senha'];
             $Usuarios = $this->model('Usuarios');
             $Usuarios::create($nome, $email, $senha, $id_equipe);
-
             $this->redirect('usuario/index');
         } else {
             $this->pageNotFound();

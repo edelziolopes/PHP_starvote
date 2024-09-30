@@ -9,6 +9,10 @@
         <input type="email" class="form-control" id="email" name="email" required>
     </div>
     <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input type="senha" class="form-control" id="senha" name="senha" required>
+    </div>
+    <div class="mb-3">
         <label for="id_equipe" class="form-label">Equipe</label>
         <select class="form-select" id="id_equipe" name="id_equipe" required>
             <option value="" disabled selected>Escolha uma equipe</option>

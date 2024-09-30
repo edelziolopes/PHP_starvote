@@ -34,6 +34,7 @@
                         <li class="nav-item"><a class="nav-link" href="/foto">Fotos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/vinculo">Vinculos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/voto">Votos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/grafico">Gráfico</a></li>
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="/vinculo">Resultados</a></li>
                     <?php endif; } ?>

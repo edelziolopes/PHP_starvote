@@ -73,4 +73,18 @@ class Votos
         return $result->rowCount();
     }
 
+    public static function somaVotosPorProjeto()
+{
+    $conn = new Database();
+    $result = $conn->executeQuery('
+        SELECT p.id AS projeto_id, p.projeto, SUM(v.voto) AS soma_votos
+        FROM tb_projeto p
+        LEFT JOIN tb_voto v ON p.id = v.id_projeto
+        GROUP BY p.id
+        ORDER BY soma_votos DESC, p.projeto;
+    ');
+    return $result->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 }

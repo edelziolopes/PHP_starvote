@@ -8,15 +8,16 @@ class Voto extends Controller
         $Votos = $this->model('Votos');
         $Usuarios = $this->model('Usuarios');
         $Projetos = $this->model('Projetos');
-        
+    
         $data = $Votos::findAll();
         $usuarios = $Usuarios::findAll();
         $projetos = $Projetos::findAll();
-
-        $this->view('voto/index', ['votos' => $data, 'usuarios' => $usuarios, 'projetos' => $projetos]);
+        $soma_votos = $Votos::somaVotosPorProjeto();
+    
+        $this->view('voto/index', ['votos' => $data,'usuarios' => $usuarios,'projetos' => $projetos,'soma_votos' => $soma_votos]);
     }
 
-    public function create($id = null)
+    public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_usuario = $_POST['id_usuario'];
@@ -24,8 +25,8 @@ class Voto extends Controller
             $voto = $_POST['voto'];
             $Votos = $this->model('Votos');
             $Votos::createOrUpdate($id_usuario, $id_projeto, $voto);
-            if (is_numeric($id)) { $this->redirect('/home/show/'.$id); }
-            else { $this->redirect('voto/index'); }
+            
+            $this->redirect('voto/index');
         } else {
             $this->pageNotFound();
         }
@@ -46,4 +47,5 @@ class Voto extends Controller
     {
         $this->pageNotFound();
     }
+    
 }

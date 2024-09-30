@@ -57,3 +57,25 @@
     <?php } ?>
   </tbody>
 </table>
+
+<hr>
+
+<h3 class="mt-5">Soma dos Votos</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Projeto</th>
+      <th scope="col">Soma de Votos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data['soma_votos'] as $voto) { ?>
+    <tr>
+      <td><?= $voto['projeto_id'] ?></td>
+      <td><?= $voto['projeto'] ?></td>
+      <td><?php echo isset($voto['soma_votos']) ? $voto['soma_votos'] : 0;?></td>
+    </tr>
+    <?php } ?>
+  </tbody>
+</table>
