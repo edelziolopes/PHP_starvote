@@ -1,4 +1,5 @@
 <?php
+
 use Application\core\Controller;
 
 class Grafico extends Controller
@@ -7,7 +8,6 @@ class Grafico extends Controller
     {
         $Votos = $this->model('Votos');
         $soma_votos = $Votos::somaVotosPorProjeto();
-
         $this->view('grafico/index', ['soma_votos' => $soma_votos]);
     }
 
@@ -15,10 +15,9 @@ class Grafico extends Controller
     {
         $Votos = $this->model('Votos');
         $soma_votos = $Votos::somaVotosPorProjeto();
-
         $top3 = array_slice($soma_votos, 0, 3);
-        //var_dump ($top3);
-
+        header('Content-Type: application/json');
         echo json_encode($top3);
+        exit();
     }
 }

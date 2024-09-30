@@ -86,5 +86,17 @@ class Votos
     return $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
+    public static function findByUserAndProject(int $id_usuario, int $id_projeto)
+    {
+        $conn = new Database();
+        $result = $conn->executeQuery('
+            SELECT voto 
+            FROM tb_voto 
+            WHERE id_usuario = :ID_USUARIO AND id_projeto = :ID_PROJETO LIMIT 1', 
+            array(':ID_USUARIO' => $id_usuario, ':ID_PROJETO' => $id_projeto)
+        );
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }

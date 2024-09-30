@@ -1,14 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/min/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@1.8.0"></script>
-
-<style>
-  canvas {
-    display: inline-block !important;
-  }
-</style>
-</head>
-<body>
 <div class="wrapper">
   <canvas id="myChart" width="1600" height="900"></canvas>
 </div>
@@ -21,6 +10,10 @@
   };
 
   var color = Chart.helpers.color;
+
+  // Objeto para manter o histórico dos projetos pelo nome (ou ID)
+  var projectHistory = {};
+
   var config = {
     type: 'line',
     data: {
@@ -63,22 +56,28 @@
               fetch('/grafico/data')
                 .then(response => response.json())
                 .then(data => {
-                  // Limpa os dados anteriores
-                  chart.data.datasets[0].data = [];
-                  chart.data.datasets[1].data = [];
-                  chart.data.datasets[2].data = [];
-
-                  // Atualiza os datasets com os dados do array fornecido
+                  // Atualiza os datasets com os novos valores, mantendo os dados antigos
                   data.forEach((item, index) => {
+                    var projectName = item.projeto; // Você também pode usar o "id" do projeto
+
+                    // Se o projeto ainda não está no histórico, inicializamos
+                    if (!projectHistory[projectName]) {
+                      projectHistory[projectName] = [];
+                    }
+
+                    // Adiciona o novo valor no histórico do projeto
+                    projectHistory[projectName].push({
+                      x: Date.now(),
+                      y: parseInt(item.soma_votos)
+                    });
+
+                    // Atualiza o dataset correto com o histórico do projeto
                     if (index < 3) {
-                      chart.data.datasets[index].data.push({
-                        x: Date.now(),
-                        y: parseInt(item.soma_votos)
-                      });
-                      chart.data.datasets[index].label = item.projeto;
+                      chart.data.datasets[index].data = projectHistory[projectName];
+                      chart.data.datasets[index].label = projectName;
                     }
                   });
-                  
+
                   chart.update();
                 });
             }

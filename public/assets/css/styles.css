@@ -47,3 +47,6 @@ a {
     object-fit: cover; /* Corta a imagem para caber no container */
     width: 100%; /* Garante que a largura ocupe todo o card */
 }
+canvas {
+    display: inline-block !important;
+}
