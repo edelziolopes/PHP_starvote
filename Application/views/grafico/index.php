@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <canvas id="myChart" width="1600" height="900"></canvas>
+  <canvas id="myChart" width="1600" height="700"></canvas>
 </div>
 
 <script>

@@ -23,58 +23,58 @@ if (strpos($request_uri, '/grafico/data') !== false) {
     <link href="/assets/css/styles.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto"> <!-- Alinhar itens à direita -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
-                </li>
-                <?php
-                if (isset($_COOKIE['usuario_equipe_id'])) { 
-                    $equipe_id = $_COOKIE['usuario_equipe_id'];
-                    if ($equipe_id == 1): ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="admDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-cogs"></i> Adm
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="admDropdown">
-                        <li><a class="dropdown-item" href="/categoria"><i class="fas fa-tags"></i> Categorias</a></li>
-                        <li><a class="dropdown-item" href="/equipe"><i class="fas fa-users"></i> Equipes</a></li>
-                        <li><a class="dropdown-item" href="/usuario"><i class="fas fa-user"></i> Usuários</a></li>
-                        <li><a class="dropdown-item" href="/projeto"><i class="fas fa-folder"></i> Projetos</a></li>
-                        <li><a class="dropdown-item" href="/foto"><i class="fas fa-image"></i> Fotos</a></li>
-                        <li><a class="dropdown-item" href="/vinculo"><i class="fas fa-link"></i> Vínculos</a></li>
-                        
-                        <!-- Submenu para Gráfico -->
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="#" id="graficoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-chart-bar"></i> Gráfico
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="graficoDropdown">
-                                <li><a class="dropdown-item" href="/grafico"><i class="fas fa-chart-line"></i> Gráfico</a></li>
-                                <li><a class="dropdown-item" href="/grafico/data"><i class="fas fa-database"></i> Dados</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <?php else: ?>
-                    <li class="nav-item"><a class="nav-link" href="/vinculo">Resultados</a></li>
-                <?php endif; } ?>
-                <?php if (!isset($_COOKIE['usuario_id'])): ?>
-                    <li class="nav-item"><a class="nav-link" href="/usuario/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/usuario/register"><i class="fas fa-user-plus"></i> Cadastre-se</a></li>
-                <?php endif; ?>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Logo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto"> <!-- Alinhar itens à direita -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <?php
+                    if (isset($_COOKIE['usuario_equipe_id'])) { 
+                        $equipe_id = $_COOKIE['usuario_equipe_id'];
+                        if ($equipe_id == 1): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="admDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-cogs"></i> Adm
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="admDropdown">
+                            <li><a class="dropdown-item" href="/categoria"><i class="fas fa-tags"></i> Categorias</a></li>
+                            <li><a class="dropdown-item" href="/equipe"><i class="fas fa-users"></i> Equipes</a></li>
+                            <li><a class="dropdown-item" href="/usuario"><i class="fas fa-user"></i> Usuários</a></li>
+                            <li><a class="dropdown-item" href="/projeto"><i class="fas fa-folder"></i> Projetos</a></li>
+                            <li><a class="dropdown-item" href="/foto"><i class="fas fa-image"></i> Fotos</a></li>
+                            <li><a class="dropdown-item" href="/vinculo"><i class="fas fa-link"></i> Vínculos</a></li>
+                            <li><a class="dropdown-item" href="/vinculo"><i class="fas fa-link"></i> Vínculos</a></li>
+                            <li><a class="dropdown-item" href="/voto"><i class="fas fa-star"></i> Votos</a></li>
+                            
+                            <!-- Submenu para Gráfico -->
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="/grafico" id="graficoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-chart-bar"></i> Gráfico
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="graficoDropdown">
+                                    <li><a class="dropdown-item" href="/grafico"><i class="fas fa-chart-line"></i> Gráfico</a></li>
+                                    <li><a class="dropdown-item" href="/grafico/data"><i class="fas fa-database"></i> Dados</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="/vinculo">Resultados</a></li>
+                    <?php endif; } ?>
+                    <?php if (!isset($_COOKIE['usuario_id'])): ?>
+                        <li class="nav-item"><a class="nav-link" href="/usuario/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/usuario/register"><i class="fas fa-user-plus"></i> Cadastre-se</a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-
-
+    </nav>
     <div class="container my-5">
         <div class="content">
             <?php
@@ -82,13 +82,11 @@ if (strpos($request_uri, '/grafico/data') !== false) {
             ?>
         </div>
     </div>
-
     <footer class="text-center py-3">
         <div class="container">
             <span>&copy; 2024 starvote.com.br</span>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/script.js    "></script>
