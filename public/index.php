@@ -19,42 +19,61 @@ if (strpos($request_uri, '/grafico/data') !== false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout com Bootstrap</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="/assets/css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">Logo</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto"> <!-- Alinhar itens à direita -->
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <?php
-                if (isset($_COOKIE['usuario_equipe_id'])) { $equipe_id = $_COOKIE['usuario_equipe_id'];
-                if ($equipe_id == 1):?>
-                    <li class="nav-item"><a class="nav-link" href="/categoria">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/equipe">Equipes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/usuario">Usuários</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/projeto">Projetos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/foto">Fotos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/vinculo">Vinculos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/voto">Votos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/grafico">Gráfico</a></li>
+                if (isset($_COOKIE['usuario_equipe_id'])) { 
+                    $equipe_id = $_COOKIE['usuario_equipe_id'];
+                    if ($equipe_id == 1): ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="admDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-cogs"></i> Adm
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="admDropdown">
+                        <li><a class="dropdown-item" href="/categoria"><i class="fas fa-tags"></i> Categorias</a></li>
+                        <li><a class="dropdown-item" href="/equipe"><i class="fas fa-users"></i> Equipes</a></li>
+                        <li><a class="dropdown-item" href="/usuario"><i class="fas fa-user"></i> Usuários</a></li>
+                        <li><a class="dropdown-item" href="/projeto"><i class="fas fa-folder"></i> Projetos</a></li>
+                        <li><a class="dropdown-item" href="/foto"><i class="fas fa-image"></i> Fotos</a></li>
+                        <li><a class="dropdown-item" href="/vinculo"><i class="fas fa-link"></i> Vínculos</a></li>
+                        
+                        <!-- Submenu para Gráfico -->
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#" id="graficoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-chart-bar"></i> Gráfico
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="graficoDropdown">
+                                <li><a class="dropdown-item" href="/grafico"><i class="fas fa-chart-line"></i> Gráfico</a></li>
+                                <li><a class="dropdown-item" href="/grafico/data"><i class="fas fa-database"></i> Dados</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
                 <?php else: ?>
                     <li class="nav-item"><a class="nav-link" href="/vinculo">Resultados</a></li>
                 <?php endif; } ?>
                 <?php if (!isset($_COOKIE['usuario_id'])): ?>
-                    <li class="nav-item"><a class="nav-link" href="/usuario/login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/usuario/register">Cadastre-se</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/usuario/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/usuario/register"><i class="fas fa-user-plus"></i> Cadastre-se</a></li>
                 <?php endif; ?>
             </ul>
-            </div>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <div class="container my-5">
         <div class="content">
@@ -72,6 +91,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/script.js    "></script>
 </body>
 </html>
 <?php } ?>
