@@ -98,7 +98,7 @@
             <ul class="list-group mb-4">
                 <?php foreach ($data['comentarios'] as $comentario) { ?>
                     <li class="list-group-item">
-                        <strong><?= htmlspecialchars($comentario['usuario_nome']) ?>:</strong>
+                        <strong><?= htmlspecialchars($comentario['nome']) ?>:</strong>
                         <p><?= htmlspecialchars($comentario['comentario']) ?></p>
                     </li>
                 <?php } ?>
@@ -106,15 +106,18 @@
         <?php } else { ?>
             <p class="text-muted">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
         <?php } ?>
+    </div>
+
 
         <!-- Formulário para adicionar novo comentário -->
         <?php if (isset($_COOKIE['usuario_id'])): ?>
-            <form action="/comentario/adicionar" method="POST">
+            <form action="/comentario/create/<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>" method="POST">
                 <div class="mb-3">
                     <label for="comentario" class="form-label">Deixe seu comentário:</label>
                     <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
                 </div>
-                <input type="hidden" name="projeto_id" value="<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>">
+                <input type="hidden" name="id_usuario" value="<?= $_COOKIE['usuario_id'] ?>">
+                <input type="hidden" name="id_projeto" value="<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>">
                 <button type="submit" class="btn btn-primary">Comentar</button>
             </form>
         <?php endif ?>

@@ -1,33 +1,34 @@
 <?php
 use Application\core\Controller;
 
-class Voto extends Controller
+class Comentario extends Controller
 {
+
+    /*
     public function index()
     {
-        $Votos = $this->model('Votos');
+        $Comentarios = $this->model('Comentarios');
         $Usuarios = $this->model('Usuarios');
         $Projetos = $this->model('Projetos');
     
-        $data = $Votos::findAll();
+        $data = $Comentarios::findAll();
         $usuarios = $Usuarios::findAll();
         $projetos = $Projetos::findAll();
-        $soma_votos = $Votos::somaVotosPorProjeto();
     
-        $this->view('voto/index', ['votos' => $data,'usuarios' => $usuarios,'projetos' => $projetos,'soma_votos' => $soma_votos]);
-    }
+        $this->view('voto/index', ['comentarios' => $data,'usuarios' => $usuarios,'projetos' => $projetos]);
+    }*/
 
     public function create($id = null)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_usuario = $_POST['id_usuario'];
             $id_projeto = $_POST['id_projeto'];
-            $voto = $_POST['voto'];
-            $Votos = $this->model('Votos');
-            $Votos::createOrUpdate($id_usuario, $id_projeto, $voto);
+            $comentario = $_POST['comentario'];
+            $Comentarios = $this->model('Comentarios');
+            $Comentarios::create($id_usuario, $id_projeto, $comentario);
             if (is_numeric($id)) { $this->redirect('home/show/'.$id); }
-            else { $this->redirect('voto/index'); }
-            $this->redirect('voto/index');
+            else { $this->redirect('comentario/index'); }
+            $this->redirect('comentario/index');
         } else {
             $this->pageNotFound();
         }
@@ -42,11 +43,6 @@ class Voto extends Controller
         } else {
             $this->pageNotFound();
         }
-    }
-
-    public function edit()
-    {
-        $this->pageNotFound();
     }
     
 }

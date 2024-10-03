@@ -16,6 +16,7 @@ a {
     padding: 20px;
     border-radius: 10px;
 }
+
 .carousel-inner img {
     height: 200px; /* Defina uma altura fixa desejada */
     object-fit: cover; /* Corta a imagem para caber no container */
@@ -56,7 +57,7 @@ canvas {
 
 .dropdown-submenu .dropdown-menu {
     top: 0;
-    right: 100%; /* Mover o submenu à direita */
+    right   : 100%; /* Mover o submenu à direita */
     margin-top: -6px; /* Ajuste conforme necessário */
     display: none; /* Esconde o submenu inicialmente */
 }
@@ -67,4 +68,110 @@ canvas {
 .dropdown-item i {
     margin-right: 8px; /* Ajusta o espaço entre o ícone e o texto */
     font-size: 16px; /* Tamanho do ícone */
+}
+
+
+
+
+
+/* Tema escuro */
+body {
+    background-color: #cecece;
+    color: #ffffff;
+}
+
+/* Estilo do conteúdo com fundo branco e texto preto */
+.content {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Estilo do Header */
+nav.navbar {
+    background-color: #032859; /* Azul marinho */
+}
+
+nav.navbar .navbar-brand, 
+nav.navbar .nav-link {
+    color: #ffffff; /* Cor do texto */
+}
+
+nav.navbar .nav-link:hover {
+    color: #cccccc; /* Cor do texto ao passar o mouse */
+}
+
+/* Estilo do Footer */
+footer {
+    background-color: #032859; /* Azul marinho */
+    color: #ffffff; /* Cor do texto */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer span {
+    display: block;
+}
+
+.navbar {
+    height: 80px; /* Defina a altura do header */
+    padding: 0; /* Remova o padding extra */
+    display: flex;
+    align-items: center; /* Alinha o conteúdo verticalmente */
+    background-color: #032859; /* Cor de fundo */
+}
+
+.navbar-brand img {
+    height: 100%; /* Faça a imagem ocupar 100% da altura do navbar */
+    max-height: 200px; /* Limite o tamanho máximo da logo */
+    width: auto; /* Mantenha a proporção */
+    object-fit: contain; /* Faz a imagem se ajustar ao espaço sem distorção */
+    padding: 5px 0; /* Adicione um pouco de padding para centralização vertical */
+    margin: 0; /* Remova margens que possam afetar o layout */
+}
+
+/* Para garantir que as abas tenham visibilidade no modo colapsado */
+.navbar-nav .nav-link {
+    color: #ffffff !important; /* Assegura que as abas fiquem visíveis */
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1); /* Define um estilo para o botão colapsável */
+}
+
+.navbar-collapse {
+    background-color: #032859; /* Cor de fundo no modo colapsado */
+}
+
+/* Corrigir alinhamento no modo colapsado */
+@media (max-width: 992px) {
+    .navbar-nav {
+        text-align: center; /* Centraliza o menu no modo colapsado */
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px; /* Dá um espaçamento entre as abas no modo colapsado */
+    }
+
+    .navbar-collapse {
+        padding: 1rem;
+    }
+}
+/* Estilo do Header */
+nav.navbar {
+    height: 100px; /* Aumente a altura do header para acomodar a imagem */
+    padding: 0; /* Remova o padding extra */
+    display: flex;
+    align-items: center; /* Alinha o conteúdo verticalmente */
+    background-color: #032859; /* Cor de fundo */
+}
+
+.navbar-brand img {
+    height: 100px; /* Ajusta a altura da imagem */
+    width: auto; /* Mantém a proporção da imagem */
+    object-fit: contain; /* Ajusta a imagem sem distorção */
+    padding: 5px 0; /* Adicione um pouco de padding para centralização vertical */
+    margin: 0; /* Remova margens que possam afetar o layout */
 }

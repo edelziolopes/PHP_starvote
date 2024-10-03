@@ -17,7 +17,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layout com Bootstrap</title>
+    <title>Starvote</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="/assets/css/styles.css" rel="stylesheet">
@@ -25,7 +25,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">Logo</a>
+            <a class="navbar-brand" href="/"><img class="navbar-brand" src="/assets/img/logo.jpg"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,7 +49,6 @@ if (strpos($request_uri, '/grafico/data') !== false) {
                             <li><a class="dropdown-item" href="/projeto"><i class="fas fa-folder"></i> Projetos</a></li>
                             <li><a class="dropdown-item" href="/foto"><i class="fas fa-image"></i> Fotos</a></li>
                             <li><a class="dropdown-item" href="/vinculo"><i class="fas fa-link"></i> Vínculos</a></li>
-                            <li><a class="dropdown-item" href="/vinculo"><i class="fas fa-link"></i> Vínculos</a></li>
                             <li><a class="dropdown-item" href="/voto"><i class="fas fa-star"></i> Votos</a></li>
                             
                             <!-- Submenu para Gráfico -->
@@ -62,14 +61,18 @@ if (strpos($request_uri, '/grafico/data') !== false) {
                                     <li><a class="dropdown-item" href="/grafico/data"><i class="fas fa-database"></i> Dados</a></li>
                                 </ul>
                             </li>
+                            <li><a class="dropdown-item" href="/usuario/logout"><i class="fas fa-close"></i> Sair</a></li>
                         </ul>
                     </li>
                     <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="/vinculo">Resultados</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/grafico"><i class="fas fa-chart-line"></i> Resultados</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/usuario/logout"><i class="fas fa-close"></i> Sair</a></li>
                     <?php endif; } ?>
                     <?php if (!isset($_COOKIE['usuario_id'])): ?>
                         <li class="nav-item"><a class="nav-link" href="/usuario/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="/usuario/register"><i class="fas fa-user-plus"></i> Cadastre-se</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/grafico/"><i class="fas fa-chart-line"></i> Gráfico</a></li>
+                        
                     <?php endif; ?>
                 </ul>
             </div>
