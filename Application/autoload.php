@@ -9,7 +9,6 @@ spl_autoload_register(function ($filename) {
     if (file_exists($file)) {
         require $file;
     } else {
-        // Retorna false para indicar que o arquivo não foi encontrado
         return false;
     }
 });

@@ -8,12 +8,10 @@ class Projeto extends Controller
     public function index()
     {
         $Projetos = $this->model('Projetos');
+        $Projeto = $Projetos::findAll();        
         $Equipes = $this->model('Equipes');
-        
-        $data = $Projetos::findAll();
-        $equipes = $Equipes::findAll();
-
-        $this->view('projeto/index', ['projetos' => $data, 'equipes' => $equipes]);
+        $Equipe = $Equipes::findAll();
+        $this->view('projeto/index', ['projetos' => $Projeto, 'equipes' => $Equipe]);
     }
 
     public function delete($id = null)

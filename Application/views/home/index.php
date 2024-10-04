@@ -1,8 +1,7 @@
-<h1>Projetos</h1>
-
 <div class="container">
     <div class="row">
 
+    <!--
         <div class="my-4">
             <?php if (isset($_COOKIE['usuario_id'])): ?>
                 <?php
@@ -16,6 +15,17 @@
                 <a href="/usuario/login" class="btn btn-primary">Login</a>
                 <a href="/usuario/register" class="btn btn-secondary">Cadastre-se</a>
             <?php endif; ?>
+        </div>
+    -->
+
+        <div class="mb-2 d-flex justify-content-center flex-wrap">
+        <?php foreach($data['equipes'] as $equipe): ?>
+                <?php if ($equipe['categoria'] == 'Alunos'): ?>
+                    <a href="/home/index/<?= $equipe['id'] ?>" class="m-1 btn btn-outline-primary <?= isset($data['equipeSelecionada']) && $data['equipeSelecionada'] == $equipe['id'] ? 'active' : '' ?>">
+                        <?= $equipe['equipe'] ?>
+                    </a>
+                <?php endif; ?> 
+            <?php endforeach; ?>
         </div>
 
         <?php 

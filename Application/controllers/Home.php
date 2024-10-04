@@ -2,11 +2,18 @@
 use Application\core\Controller;
 class Home extends Controller
 {
-    public function index()
+    public function index($id = null)
     {
       $Projetos = $this->model('Projetos');
-      $Projeto = $Projetos::findAllWithDetails();
-      $this->view('home/index', ['projetos' => $Projeto]);
+      $Projeto = $Projetos::findAllWithDetails($id);
+
+      $Equipes = $this->model('Equipes');
+      $Equipe = $Equipes::findAll();
+      $this->view('home/index', [
+        'projetos' => $Projeto,
+        'equipes' => $Equipe,
+        'equipeSelecionada' => $id
+    ]);
     }
 
     public function show($id = null)
