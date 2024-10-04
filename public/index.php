@@ -79,7 +79,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
             </div>
         </div>
     </nav>
-    <div class="container my-5">
+    <div class="container my-3">
         <div class="content">
             <?php
             $app = new App();
