@@ -73,23 +73,63 @@
 
     <!-- Botão de votação -->
     <?php if (isset($_COOKIE['usuario_id'])): ?>
-        <div class="vote-section mb-4">
-            <?php $voto = isset($data['votoExistente']['voto']) ? (int)$data['votoExistente']['voto'] : null; ?>
-            <form action="/voto/create/<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>" method="POST">
-                <p>
-                    <input style="width:100px;" type="number" class="form-control" id="voto" name="voto" min="1" max="5" value="<?= isset($voto) ? htmlspecialchars($voto) : '' ?>" required>
-                </p>
+        <div class="vote-section mb-4 border rounded p-3">
+            <?php $voto = isset($data['votoExistente']['voto']) ? (int)$data['votoExistente']['voto'] : 0; ?>
+            <form id="voteForm" action="/voto/create/<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>" method="POST">
+                <div class="star-rating"> Votar: 
+                    <!-- Ícones de estrelas -->
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                        <i class="fa fa-star <?= ($i <= $voto) ? 'checked' : '' ?>" data-value="<?= $i ?>"></i>
+                    <?php endfor; ?>
+                </div>
+                <!-- Input oculto para enviar o valor da estrela -->
+                <input id="voto" name="voto" type="hidden" value="<?= isset($voto) ? htmlspecialchars($voto) : '' ?>" required>
                 <input id="id_usuario" name="id_usuario" type="hidden" value="<?= $_COOKIE['usuario_id'] ?>">
                 <input id="id_projeto" name="id_projeto" type="hidden" value="<?= htmlspecialchars($data['projeto'][0]['projeto_id']) ?>">
-                <input type="submit" class="btn btn-success" value="Votar">
             </form>
+            <!-- Alerta de sucesso -->
+            <div id="voto-alert" class="alert alert-success d-none mt-3 mb-0" role="alert">
+                Seu voto foi registrado com sucesso!
+            </div>
+            <script>
+                // Verifique se o voto já existe no PHP
+                const votoExistente = <?= isset($voto) && $voto > 0 ? 'true' : 'false'; ?>;
+                if (votoExistente) {
+                    // Exibe o alerta de sucesso somente se o voto existir
+                    const alert = document.getElementById('voto-alert');
+                    alert.classList.remove('d-none');
+                    // Esconde o alerta após 5 segundos
+                    setTimeout(() => {
+                        alert.classList.add('d-none');
+                    }, 5000);
+                }
+                // Script para gerenciar o clique nas estrelas
+                document.querySelectorAll('.star-rating .fa-star').forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = this.getAttribute('data-value');
+                        // Remove a classe "checked" de todas as estrelas
+                        document.querySelectorAll('.star-rating .fa-star').forEach(s => s.classList.remove('checked'));
+                        // Adiciona a classe "checked" às estrelas até o valor selecionado
+                        for (let i = 0; i < value; i++) {
+                            document.querySelectorAll('.star-rating .fa-star')[i].classList.add('checked');
+                        }
+                        // Atualiza o valor do input oculto
+                        document.getElementById('voto').value = value;
+                        // Submete o formulário automaticamente após o clique na estrela
+                        document.getElementById('voteForm').submit();
+                    });
+                });
+            </script>
         </div>
     <?php else: ?>
         <div class="vote-section mb-4">
             <a href="/usuario/login" class="btn btn-primary">Login</a>
             <a href="/usuario/register" class="btn btn-secondary">Cadastre-se</a>
         </div>
-    <?php endif ?>
+    <?php endif; ?>
+
+
+
 
     <!-- Área de Comentários -->
     <div class="comments-section">
