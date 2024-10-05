@@ -1,3 +1,4 @@
+<!--
 <div class="my-4">
     <?php if (isset($_COOKIE['usuario_id'])): ?>
         <?php
@@ -12,7 +13,7 @@
         <a href="/usuario/register" class="btn btn-secondary">Cadastre-se</a>
     <?php endif; ?>
 </div>
-
+-->
 
 <?php if (isset($data['projeto']) && !empty($data['projeto'])) { ?>
     <!-- Carrossel de fotos (se houver fotos) -->
@@ -93,20 +94,22 @@
     <!-- Área de Comentários -->
     <div class="comments-section">
         <h3>Comentários</h3>
-        <!-- Exibir comentários existentes -->
+        
+        <!-- Exibir comentários existentes com scroll -->
         <?php if (isset($data['comentarios']) && !empty($data['comentarios'])) { ?>
-            <ul class="list-group mb-4">
+            <div class="list-group mb-4 overflow-auto" style="max-height: 300px;">
                 <?php foreach ($data['comentarios'] as $comentario) { ?>
                     <li class="list-group-item">
                         <strong><?= htmlspecialchars($comentario['nome']) ?>:</strong>
                         <p><?= htmlspecialchars($comentario['comentario']) ?></p>
                     </li>
                 <?php } ?>
-            </ul>
+            </div>
         <?php } else { ?>
             <p class="text-muted">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
         <?php } ?>
     </div>
+
 
 
         <!-- Formulário para adicionar novo comentário -->
