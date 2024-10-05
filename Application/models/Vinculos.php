@@ -75,7 +75,11 @@ class Vinculos
     public static function findUsuariosByEquipe(int $id_equipe)
     {
         $conn = new Database();
-        $result = $conn->executeQuery('SELECT * FROM tb_usuario WHERE id_equipe = :ID_EQUIPE', array(':ID_EQUIPE' => $id_equipe));
+        $result = $conn->executeQuery('
+            SELECT u.*, e.equipe 
+            FROM tb_usuario u
+            JOIN tb_equipe e ON u.id_equipe = e.id
+            WHERE u.id_equipe = :ID_EQUIPE', array(':ID_EQUIPE' => $id_equipe));
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 }

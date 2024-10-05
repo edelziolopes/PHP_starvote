@@ -9,9 +9,11 @@ class Usuarios
     {
         $conn = new Database();
         $result = $conn->executeQuery('
-            SELECT u.id, u.nome, u.email, u.id_equipe, e.equipe
+            SELECT u.id, u.nome, u.email, u.id_equipe, e.equipe, c.categoria
             FROM tb_usuario u
             JOIN tb_equipe e ON u.id_equipe = e.id
+            JOIN tb_categoria c ON e.id_categoria = c.id
+            ORDER BY u.nome ASC
         ');
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }

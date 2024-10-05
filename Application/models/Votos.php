@@ -9,10 +9,11 @@ class Votos
     {
         $conn = new Database();
         $result = $conn->executeQuery('
-            SELECT v.id, u.nome AS usuario, p.projeto AS projeto, v.voto
+            SELECT v.id, u.nome AS usuario, p.projeto AS projeto, e.equipe AS equipe, v.voto
             FROM tb_voto v
             JOIN tb_usuario u ON v.id_usuario = u.id
             JOIN tb_projeto p ON v.id_projeto = p.id
+            JOIN tb_equipe e ON p.id_equipe = e.id
         ');
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }

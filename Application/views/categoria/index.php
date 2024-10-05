@@ -1,42 +1,44 @@
 <h2>Cadastro de Categorias</h2>
 <form action="/categoria/create" method="POST">
     <div class="mb-3">
-        <label for="categoria" class="form-label">Categoria</label>
+        <label for="categoria" class="form-label"><i class="fas fa-tag"></i> Categoria</label>
         <input type="text" class="form-control" id="categoria" name="categoria" required>
     </div>
     <div class="mb-3">
-        <label for="peso" class="form-label">Peso</label>
+        <label for="peso" class="form-label"><i class="fas fa-weight-hanging"></i> Peso</label>
         <input type="number" class="form-control" id="peso" name="peso" required>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar</button>
 </form>
 
 <hr>
 
 <h3 class="mt-5">Lista de Categorias</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Categoria</th>
-      <th scope="col">Peso</th>
-      <th scope="col">Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach ($data['categorias'] as $categoria) { ?>
-    <tr>
-      <td><?= $categoria['id'] ?></td>
-      <td><?= $categoria['categoria'] ?></td>
-      <td><?= $categoria['peso'] ?></td>
-      <td>
-        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="<?= $categoria['id'] ?>" data-categoria="<?= $categoria['categoria'] ?>" data-peso="<?= $categoria['peso'] ?>">Editar</button>
-        <a href="/categoria/delete/<?= $categoria['id'] ?>" class="btn btn-sm btn-danger">Excluir</a>
-      </td>
-    </tr>
-    <?php } ?>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><i class="fas fa-id-badge"></i> ID</th>
+        <th scope="col"><i class="fas fa-tag"></i> Categoria</th>
+        <th scope="col"><i class="fas fa-weight-hanging"></i> Peso</th>
+        <th scope="col"><i class="fas fa-cog"></i> Ações</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <?php foreach ($data['categorias'] as $categoria) { ?>
+      <tr>
+        <td><?= $categoria['id'] ?></td>
+        <td><?= $categoria['categoria'] ?></td>
+        <td><?= $categoria['peso'] ?></td>
+        <td>
+          <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="<?= $categoria['id'] ?>" data-categoria="<?= $categoria['categoria'] ?>" data-peso="<?= $categoria['peso'] ?>"><i class="fas fa-edit"></i> Editar</button>
+          <a href="/categoria/delete/<?= $categoria['id'] ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Excluir</a>
+        </td>
+      </tr>
+      <?php } ?>
+    </tbody>
+  </table>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">

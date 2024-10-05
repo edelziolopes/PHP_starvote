@@ -30,3 +30,5 @@ canvas { display: inline-block !important; }
     .navbar-logo { max-height: 50px; }
     .navbar-toggler {margin-left: auto; }
 }   
+
+.bootstrap-select .dropdown-menu { max-height: 200px; overflow-y: auto; }

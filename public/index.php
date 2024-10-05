@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require '../Application/autoload.php';
 use Application\core\App;
 use Application\core\Controller;
@@ -21,6 +22,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta3/css/bootstrap-select.min.css">
     <link href="/assets/css/styles.css" rel="stylesheet">
 </head>
 <body>
@@ -93,6 +95,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta3/js/bootstrap-select.min.js"></script>
     <script src="assets/js/script.js    "></script>
 </body>
 </html>
