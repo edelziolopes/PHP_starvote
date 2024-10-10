@@ -88,7 +88,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
                                 <span><?= htmlspecialchars($_COOKIE['usuario_nome']) ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="/usuario/perfil"><i class="fas fa-user"></i> Perfil</a></li>
+                                <li><a class="dropdown-item" href="/usuario/profile"><i class="fas fa-user"></i> Perfil</a></li>
                                 <li><a class="dropdown-item" href="/usuario/logout"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
                             </ul>
                         </li>
