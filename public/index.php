@@ -49,6 +49,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
                             <li><a class="dropdown-item" href="/categoria"><i class="fas fa-tags"></i> Categorias</a></li>
                             <li><a class="dropdown-item" href="/equipe"><i class="fas fa-users"></i> Equipes</a></li>
                             <li><a class="dropdown-item" href="/usuario"><i class="fas fa-user"></i> Usuários</a></li>
+                            <li><a class="dropdown-item" href="/retrato"><i class="fas fa-image"></i> Retratos</a></li>
                             <li><a class="dropdown-item" href="/projeto"><i class="fas fa-folder"></i> Projetos</a></li>
                             <li><a class="dropdown-item" href="/foto"><i class="fas fa-image"></i> Fotos</a></li>
                             <li><a class="dropdown-item" href="/vinculo"><i class="fas fa-link"></i> Vínculos</a></li>
@@ -64,12 +65,33 @@ if (strpos($request_uri, '/grafico/data') !== false) {
                                     <li><a class="dropdown-item" href="/grafico/data"><i class="fas fa-database"></i> Dados</a></li>
                                 </ul>
                             </li>
-                            <li><a class="dropdown-item" href="/usuario/logout"><i class="fas fa-close"></i> Sair</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="margin-top:-6px;" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <!-- Exibe a foto do usuário e o nome -->
+                            <img src="/retratos/<?= htmlspecialchars($_COOKIE['usuario_retrato']) ?>" alt="Foto do usuário" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; margin-right: 8px;">
+                            <span><?= htmlspecialchars($_COOKIE['usuario_nome']) ?></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/usuario/profile"><i class="fas fa-user"></i> Perfil</a></li>
+                            <li><a class="dropdown-item" href="/usuario/logout"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
                         </ul>
                     </li>
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="/grafico"><i class="fas fa-chart-line"></i> Resultados</a></li>
                         <li class="nav-item"><a class="nav-link" href="/usuario/logout"><i class="fas fa-close"></i> Sair</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <!-- Exibe a foto do usuário e o nome -->
+                                <img src="/retratos/<?= htmlspecialchars($_COOKIE['usuario_retrato']) ?>" alt="Foto do usuário" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; margin-right: 8px;">
+                                <span><?= htmlspecialchars($_COOKIE['usuario_nome']) ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="/usuario/perfil"><i class="fas fa-user"></i> Perfil</a></li>
+                                <li><a class="dropdown-item" href="/usuario/logout"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                            </ul>
+                        </li>
                     <?php endif; } ?>
                     <?php if (!isset($_COOKIE['usuario_id'])): ?>
                         <li class="nav-item"><a class="nav-link" href="/usuario/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
@@ -83,9 +105,7 @@ if (strpos($request_uri, '/grafico/data') !== false) {
     </nav>
     <div class="container my-3">
         <div class="content">
-            <?php
-            $app = new App();
-            ?>
+            <?php $app = new App(); ?>
         </div>
     </div>
     <footer class="text-center py-3">

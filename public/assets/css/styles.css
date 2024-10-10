@@ -1,8 +1,7 @@
 body { background-color: #cecece; color: #ffffff; }
 
 .content { background-color: #ffffff; color: #000000; padding: 20px; border-radius: 10px; }
-nav, footer { background-color: #032859; }
-
+nav, footer { background-color: #032859; display: flex; align-items: center; height: 100%; }
 .navbar-logo { height: auto; max-height: 40px; width: auto; }
 
 a { color: #ffffff; }
@@ -41,5 +40,12 @@ canvas { display: inline-block !important; }
 
 .fa-star.checked {
     color: gold; /* Cor quando a estrela é selecionada */
+}
+
+.navheight{
+    margin: 0;
+    padding: 0;
+    height: 40px; /* Ajustar conforme necessário */
+    width: auto;
 }
 

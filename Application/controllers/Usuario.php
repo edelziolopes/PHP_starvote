@@ -58,6 +58,53 @@ class Usuario extends Controller
             $this->pageNotFound();
         }
     }
+    public function profile()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_COOKIE['usuario_id'];
+            $nome = $_POST['nome'];
+            $email = $_POST['email'];
+            $id_equipe = $_POST['id_equipe'];
+            $senha = isset($_POST['senha']) ? $_POST['senha'] : null;
+    
+            if (is_numeric($id)) {
+                // Atualizar dados do usuário
+                $Usuarios = $this->model('Usuarios');
+                $Usuarios::editById($id, $nome, $email, $id_equipe, $senha);
+    
+                // Verifica e processa o upload do retrato
+                if (isset($_FILES['retrato']) && $_FILES['retrato']['error'] == UPLOAD_ERR_OK) {
+                    $retratoFile = $_FILES['retrato'];
+                    $timestamp = date('YmdHis');
+                    $retratoName = $timestamp . '.jpg';
+                    $uploadPath = '../public/retratos/' . $retratoName;
+    
+                    if (move_uploaded_file($retratoFile['tmp_name'], $uploadPath)) {
+                        $Retratos = $this->model('Retratos');
+                        $Retratos::create($id, $retratoName);
+                        setcookie('usuario_retrato', $retratoName, time() + (86400 * 30), "/");
+                    }
+                }
+    
+                $this->redirect('usuario/profile');
+            } else {
+                $this->pageNotFound();
+            }
+        } else {
+            // Preenche a view com os dados do cookie
+            $Equipes = $this->model('Equipes');
+            $Equipe = $Equipes::findAll();
+
+            $this->view('usuario/profile', [
+                'nome' => $_COOKIE['usuario_nome'],
+                'email' => $_COOKIE['usuario_email'],
+                'id_equipe' => $_COOKIE['usuario_equipe'],
+                'retrato' => $_COOKIE['usuario_retrato'],
+                'equipes' => $Equipe
+            ]);
+        }
+    }
+    
 
     public function login()
     {
@@ -66,9 +113,19 @@ class Usuario extends Controller
             $senha = $_POST['senha'];
             $Usuarios = $this->model('Usuarios');
             $usuario = $Usuarios::findByEmail($email);
+            
             if ($usuario && password_verify($senha, $usuario['senha'])) {
-                setcookie('usuario_id', $usuario['id'], time() + (86400 * 30), "/");
-                setcookie('usuario_equipe_id', $usuario['id_equipe'], time() + (86400 * 30), "/");
+                // Busca detalhes completos do usuário, incluindo o retrato
+                $usuarioCompleto = $Usuarios::findById($usuario['id']);
+    
+                // Configurar cookies com os dados do usuário
+                setcookie('usuario_id', $usuarioCompleto['id'], time() + (86400 * 30), "/");
+                setcookie('usuario_equipe_id', $usuarioCompleto['id_equipe'], time() + (86400 * 30), "/");
+                setcookie('usuario_nome', $usuarioCompleto['nome'], time() + (86400 * 30), "/");
+                setcookie('usuario_email', $usuarioCompleto['email'], time() + (86400 * 30), "/");
+                setcookie('usuario_equipe', $usuarioCompleto['equipe'], time() + (86400 * 30), "/");
+                setcookie('usuario_retrato', $usuarioCompleto['retrato'], time() + (86400 * 30), "/");
+    
                 $this->redirect('home/index');
             } else {
                 $this->view('usuario/login', ['error' => 'Credenciais inválidas']);
@@ -77,6 +134,7 @@ class Usuario extends Controller
             $this->view('usuario/login');
         }
     }
+    
     
     
     public function register()
@@ -100,10 +158,18 @@ class Usuario extends Controller
 
     public function logout()
     {
-        setcookie('usuario_id', '', time() - 3600, "/"); // Remove o cookie
-        setcookie('usuario_equipe_id', '', time() - 3600, "/"); // Remove o cookie
+        // Remover todos os cookies relacionados ao usuário
+        setcookie('usuario_id', '', time() - 3600, "/");
+        setcookie('usuario_equipe_id', '', time() - 3600, "/");
+        setcookie('usuario_nome', '', time() - 3600, "/");
+        setcookie('usuario_email', '', time() - 3600, "/");
+        setcookie('usuario_equipe', '', time() - 3600, "/");
+        setcookie('usuario_retrato', '', time() - 3600, "/");
+    
+        // Redirecionar para a página inicial
         $this->redirect('home/index');
     }
+    
 
     public function checkAccess($requiredTeam)
     {

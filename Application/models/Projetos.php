@@ -116,7 +116,6 @@ class Projetos
     public static function findAllWithDetailsByEquipe(int $id)
     {
         $conn = new Database();
-
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 }

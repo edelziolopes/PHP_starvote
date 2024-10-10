@@ -22,12 +22,16 @@ class Usuarios
     {
         $conn = new Database();
         $result = $conn->executeQuery('
-            SELECT u.id, u.nome, u.email, u.id_equipe, e.equipe
+            SELECT u.id, u.nome, u.email, u.id_equipe, e.equipe, r.retrato
             FROM tb_usuario u
             JOIN tb_equipe e ON u.id_equipe = e.id
-            WHERE u.id = :ID LIMIT 1', array(':ID' => $id));
+            LEFT JOIN tb_retrato r ON u.id = r.id_usuario
+            WHERE u.id = :ID LIMIT 1', 
+            array(':ID' => $id)
+        );
         return $result->fetch(PDO::FETCH_ASSOC);
     }
+    
 
     public static function deleteById(int $id)
     {
