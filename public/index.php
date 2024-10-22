@@ -70,7 +70,9 @@ if (strpos($request_uri, '/grafico/data') !== false) {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" style="margin-top:-6px;" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <!-- Exibe a foto do usuário e o nome -->
-                            <img src="/retratos/<?= htmlspecialchars($_COOKIE['usuario_retrato']) ?>" alt="Foto do usuário" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; margin-right: 8px;">
+                            <?php if(!empty($_COOKIE['usuario_retrato'])): ?>
+                                <img src="/retratos/<?= htmlspecialchars($_COOKIE['usuario_retrato']) ?>" alt="Foto do usuário" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; margin-right: 8px;">
+                            <?php endif; ?>
                             <span><?= htmlspecialchars($_COOKIE['usuario_nome']) ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -80,11 +82,12 @@ if (strpos($request_uri, '/grafico/data') !== false) {
                     </li>
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="/grafico"><i class="fas fa-chart-line"></i> Resultados</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/usuario/logout"><i class="fas fa-close"></i> Sair</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <!-- Exibe a foto do usuário e o nome -->
-                                <img src="/retratos/<?= htmlspecialchars($_COOKIE['usuario_retrato']) ?>" alt="Foto do usuário" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; margin-right: 8px;">
+                                <?php if(!empty($_COOKIE['usuario_retrato'])): ?>
+                                    <img src="/retratos/<?= htmlspecialchars($_COOKIE['usuario_retrato']) ?>" alt="Foto do usuário" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; margin-right: 8px;">
+                                <?php endif; ?>
                                 <span><?= htmlspecialchars($_COOKIE['usuario_nome']) ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">

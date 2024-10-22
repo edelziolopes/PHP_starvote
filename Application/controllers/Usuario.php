@@ -85,7 +85,9 @@ class Usuario extends Controller
                         setcookie('usuario_retrato', $retratoName, time() + (86400 * 30), "/");
                     }
                 }
-    
+                setcookie('usuario_equipe_id', $id_equipe, time() + (86400 * 30), "/");
+                setcookie('usuario_nome', $nome, time() + (86400 * 30), "/");
+                setcookie('usuario_email', $email, time() + (86400 * 30), "/");
                 $this->redirect('usuario/profile');
             } else {
                 $this->pageNotFound();
@@ -96,11 +98,7 @@ class Usuario extends Controller
             $Equipe = $Equipes::findAll();
 
             $this->view('usuario/profile', [
-                'nome' => $_COOKIE['usuario_nome'],
-                'email' => $_COOKIE['usuario_email'],
-                'id_equipe' => $_COOKIE['usuario_equipe'],
-                'retrato' => $_COOKIE['usuario_retrato'],
-                'equipes' => $Equipe
+                'equipes' => $Equipe,
             ]);
         }
     }

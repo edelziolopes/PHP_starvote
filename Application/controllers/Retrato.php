@@ -27,6 +27,7 @@ class Retrato extends Controller
                 }
                 $Retratos::deleteById($id);
             }
+            setcookie('usuario_retrato', '', time() - 3600, "/");
             $this->redirect('retrato/index');
         } else {
             $this->pageNotFound();
@@ -47,6 +48,7 @@ class Retrato extends Controller
                 if (move_uploaded_file($retratoFile['tmp_name'], $uploadPath)) {
                     $retratos = $this->model('Retratos');
                     $retratos::create($usuarioId, $retratoName);
+                    setcookie('usuario_retrato', $retratoName, time() + (86400 * 30), "/");
                     $this->redirect('retrato/index');
                 } else {
                     $this->pageNotFound();

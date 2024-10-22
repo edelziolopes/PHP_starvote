@@ -133,15 +133,17 @@
 
     <!-- Área de Comentários -->
     <div class="comments-section">
-        <h3>Comentários</h3>
-        
+        <h3>Comentários</h3>        
         <!-- Exibir comentários existentes com scroll -->
         <?php if (isset($data['comentarios']) && !empty($data['comentarios'])) { ?>
             <div class="list-group mb-4 overflow-auto" style="max-height: 300px;">
                 <?php foreach ($data['comentarios'] as $comentario) { ?>
-                    <li class="list-group-item">
-                        <strong><?= htmlspecialchars($comentario['nome']) ?>:</strong>
-                        <p><?= htmlspecialchars($comentario['comentario']) ?></p>
+                    <li class="list-group-item d-flex align-items-start">
+                        <img src="/public/retratos/<?= htmlspecialchars($comentario['retrato']) ?>" alt="Foto de <?= htmlspecialchars($comentario['nome']) ?>" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <strong><?= htmlspecialchars($comentario['nome']) ?>:</strong>
+                            <p><?= htmlspecialchars($comentario['comentario']) ?></p>
+                        </div>
                     </li>
                 <?php } ?>
             </div>

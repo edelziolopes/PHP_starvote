@@ -25,7 +25,5 @@
 </form>
 
 <script>
-$(document).ready(function(){
-      $('.selectpicker').selectpicker();
-    });
+    $(document).ready(function(){ $('.selectpicker').selectpicker(); });
 </script>
